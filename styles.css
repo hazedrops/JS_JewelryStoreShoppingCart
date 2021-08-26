@@ -192,6 +192,16 @@ body {
   color: var(--secondaryColor);
   text-align: center;
 }
+
+@media screen and (max-width: 610px) {
+  .product-img {
+    height: 18rem;
+  }
+
+  .img-container {
+    margin: 1em;
+  }
+}
 /* ---------------End of Products ---------------- */
 
 /* --------------- Cart ---------------- */
@@ -216,7 +226,7 @@ body {
   height: 100%;
   overflow: scroll;
   z-index: 3;
-  background: #ffffec;
+  background: #fffffc;
   padding: 1.5rem;
   transition: var(--mainTransition);
   transform: translateX(100%);
