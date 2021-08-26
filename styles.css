@@ -2,9 +2,10 @@
 @import url('//use.fontawesome.com/releases/v5.15.3/css/all.css');
 
 :root {
-  --primaryColor: #f09d51;
+  --primaryColor: #ffd400;
+  --secondaryColor: #e9bd15;
   --mainWhite: #fff;
-  --mainBlack: #222;
+  --mainBlack: #333;
   --mainGrey: #ececec;
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
@@ -18,20 +19,19 @@
 
 body {
   color: var(--mainBlack);
-  background: var(--mainWhite);
+  /* background: var(--mainBg); */
   font-family: 'Lato', sans-serif;
 }
-
 
 /* --------------- Navbar ---------------- */
 .navbar {
   position: sticky;
   top: 0;
-  height: 60px;
+  height: 80px;
   width: 100%;
   display: flex;
   align-items: center;
-  background: rgb(231, 226, 221);
+  background: rgb(256, 256, 256);
   z-index: 1;
 }
 
@@ -67,8 +67,8 @@ body {
 
 /* --------------- Hero ---------------- */
 .hero {
-  min-height: calc(100vh - 60px);
-  background: url('./images/hero-bcg.jpeg') center/cover no-repeat;
+  min-height: calc(100vh - 80px);
+  background: url('./images/hero-bcg.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +84,6 @@ body {
 .banner-title {
   font-size: 3.4rem;
   text-transform: uppercase;
-  letter-spacing: var(--mainSpacing);
   margin-bottom: 3rem;
 }
 
@@ -103,6 +102,8 @@ body {
 .banner-btn:hover {
   background: transparent;
   color: var(--primaryColor);
+  background: var(--mainBlack);
+  border: none;
 }
 /* --------------- End of Hero ---------------- */
 
@@ -150,7 +151,10 @@ body {
 }
 
 .bag-btn:hover {
-  color: var(--mainWhite);
+  color: var(--primaryColor);
+  background: var(--mainBlack);
+  border: none;
+  font-weight: normal;
 }
 
 .fa-shopping-cart {
@@ -164,7 +168,8 @@ body {
 .product-img {
   display: block;
   width: 100%;
-  min-height: 12rem;
+  /* min-height: 12rem; */
+  height: 12rem;
   transition: var(--mainTransition);
 }
 
@@ -183,7 +188,8 @@ body {
 .product h4 {
   margin-top: 0.7rem;
   letter-spacing: var(--mainSpacing);
-  color: var(--primaryColor);
+  /* color: var(--primaryColor); */
+  color: var(--secondaryColor);
   text-align: center;
 }
 /* ---------------End of Products ---------------- */
@@ -196,7 +202,8 @@ body {
   width: 100%;
   height: 100%;
   transition: var(--mainTransition);
-  background: rgb(240, 157, 81, 0.5);
+  /* background: rgb(240, 157, 81, 0.5); */
+  background: rgb(185, 185, 185, 0.5);
   z-index: 2;
   visibility: hidden;
 }
@@ -209,7 +216,7 @@ body {
   height: 100%;
   overflow: scroll;
   z-index: 3;
-  background: rgb(231, 226, 221);
+  background: #ffffec;
   padding: 1.5rem;
   transition: var(--mainTransition);
   transform: translateX(100%);
@@ -249,6 +256,7 @@ body {
   grid-template-columns: auto 1fr auto;
   grid-column-gap: 1.5rem;
   margin: 1.5rem 0;
+  /* background: white; */
 }
 
 .cart-item img {

@@ -1,5 +1,13 @@
-// variables
+const client = contentful.createClient({
+  // This is the space ID. A space is like a project folder in Contentful terms
+  space: "wzenxervphqe",
+  // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+  accessToken: "4J_QEV0g2DvnSUN86zvmIh7QlYR_0VsOdkSQF6KnxVE"
+});
 
+// console.log(client);
+
+// variables
 const cartBtn = document.querySelector('.cart-btn');
 const closeCartBtn = document.querySelector('.close-cart');
 const clearCartBtn = document.querySelector('.clear-cart');
@@ -20,10 +28,20 @@ let buttonsDOM = [];
 class Products {
   async getProducts() {
     try {
+      // let contentful = await client.getEntries({
+      //   content_type: "comfyHouseProducts"
+      // });
+
+      /*** To use the local data use this block instead ***/
       let result = await fetch("products.json");
-      let data = await result.json();
-      // return data;
+      let data = await result.json();      
+      
+      // return data
       let products = data.items;
+      /***************************************************/
+      
+      // let products = contentful.items;
+
       products = products.map(item => {
         const { title, price } = item.fields;
         const { id } = item.sys;
@@ -168,7 +186,55 @@ class UI {
     });      
 
     // cart functionality
+    cartContent.addEventListener("click", event => {
+      if (event.target.classList.contains("remove-item")) {
+        let removeItem = event.target;
+        let id = removeItem.dataset.id;
 
+        // remove item from the cart content
+        cartContent.removeChild(removeItem.parentElement.parentElement);
+
+        // remove item from the local storage
+        this.removeItem(id);
+      } else if (event.target.classList.contains("fa-chevron-up")) {
+        let addAmount = event.target;
+        let id = addAmount.dataset.id;
+        let tempItem = cart.find(item => item.id === id);
+        tempItem.amount = tempItem.amount + 1;
+
+        // update the item amount of the local storage
+        Storage.saveCart(cart);
+
+        // update the total price
+        this.setCartValues(cart);
+
+        // update the number of amount in the cart - next sibling
+        addAmount.nextElementSibling.innerText = tempItem.amount;
+      } else if (event.target.classList.contains("fa-chevron-down")) {
+        let lowerAmount = event.target;
+        let id = lowerAmount.dataset.id;
+        let tempItem = cart.find(item => item.id === id);
+        tempItem.amount = tempItem.amount - 1;
+
+        if(tempItem.amount > 0) {
+          // update the item amount of the local storage
+          Storage.saveCart(cart);
+
+          // update the total price
+          this.setCartValues(cart);
+
+          // update the number of amount in the cart - previous sibling
+          lowerAmount.previousElementSibling.innerText = tempItem.amount;
+        } else {
+          // remove the item from the cart content
+          cartContent.removeChild(lowerAmount.parentElement.parentElement);
+
+          // remove the item from the local storage
+          this.removeItem(id);
+
+        }
+      }
+    });
   }
 
   clearCart() {
